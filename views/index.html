@@ -57,7 +57,7 @@
 				item.href = window.decodeURIComponent(item.href.replace(/\S+\?q=([^&]+)\S+/i, '$1'));
 				item.setAttribute('target', '_blank');
 			});
-			generatePagination();
+			generatePagination(json.total);
 			window.location.hash = window.encodeURIComponent(JSON.stringify(queryInfo));
 		};
 
