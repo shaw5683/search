@@ -8,6 +8,15 @@
 			width: 100%;
 			height: 600px;
 		}
+		#pagination li {
+			display: inline-block;
+			cursor: pointer;
+			color: #4285F4;
+		}
+		#pagination li.active {
+			color: #000;
+			pointer-events: none;
+		}
 	</style>
 </head>
 <body>
@@ -15,12 +24,31 @@
 	<input type="text">
 	<button id="search">搜索</button>
 	<div class="container"></div>
+	<ul id="pagination"></ul>
+
 	<script>
-		var search = document.querySelector('#search');
-		var input = document.querySelector('input');
-		var container = document.querySelector('.container');
-		search.addEventListener('click', async function (e) {
-			let json = await fetch(`/search?str=${input.value}`, {method: 'get'})
+		let search = document.querySelector('#search');
+		let input = document.querySelector('input');
+		let container = document.querySelector('.container');
+		let pagination = document.querySelector('#pagination');
+		const queryInfo = {
+			str: '',
+			pageIndex: 1
+		};
+
+		const init = function () {
+			const hash = window.location.hash;
+			if (hash) {
+				const historyInfo = window.decodeURIComponent(hash);
+				input.value = historyInfo.str;
+				queryInfo.pageIndex = historyInfo.pageIndex;
+				searchFn();
+			}
+		};
+
+		const searchFn = async function () {
+			queryInfo.str = input.value;
+			let json = await fetch(`/search?str=${queryInfo.str}&pageIndex=${queryInfo.pageIndex}`, {method: 'get'})
 				.then(function(response) {
 					return response.json();
 				});
@@ -29,7 +57,53 @@
 				item.href = window.decodeURIComponent(item.href.replace(/\S+\?q=([^&]+)\S+/i, '$1'));
 				item.setAttribute('target', '_blank');
 			});
+			generatePagination();
+			window.location.hash = window.encodeURIComponent(JSON.stringify(queryInfo));
+		};
+
+		const changePage = function (e) {
+			queryInfo.pageIndex = e.target.innerText;
+			searchFn();
+		};
+
+		const generatePagination = function (total) {
+			if (!total) {
+				return;
+			}
+			const max = Math.ceil((+total) / 10);
+			const cur = queryInfo.pageIndex;
+			let start = 1,
+				end = 10;
+
+			if (max <= 11) {
+				end = max;
+			} else if (cur - 5 > 0) {
+				if (cur + 5 < max) {
+					start = cur - 5;
+					end = cur + 5;
+				} else {
+					start = max - 10;
+					end = max;
+				}
+			}
+			let html = '';
+			for (let i = start; i <= end; i += 1) {
+				html += `<li${i === cur ? ' class="active"' : ''}>${i}</li>`;
+			}
+			pagination.innerHTML = html;
+		};
+
+		search.addEventListener('click', searchFn);
+
+		input.addEventListener('keyup', function (e) {
+			if (e.key === 'Enter') {
+				searchFn();
+			}
 		});
+
+		pagination.addEventListener('click', changePage)
+
+		init();
 	</script>
 </body>
 </html>
