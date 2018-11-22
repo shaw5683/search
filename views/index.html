@@ -40,9 +40,9 @@
 		};
 
 		const init = function () {
-			const hash = window.location.hash.substr(1);
+			const hash = window.location.hash;
 			if (hash) {
-				const historyInfo = window.decodeURIComponent(hash);
+				const historyInfo = JSON.parse(window.decodeURIComponent(hash).substr(1));
 				input.value = historyInfo.str || '';
 				queryInfo.pageIndex = historyInfo.pageIndex || 1;
 				searchFn();
