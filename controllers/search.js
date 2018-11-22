@@ -20,7 +20,7 @@ const getSearchRes = function (ctx) {
 
 			// The whole response has been received. Print out the result.
 			resp.on('end', () => {
-				res(getContent(data));
+				res(data);
 			});
 
 		}).on("error", (err) => {
