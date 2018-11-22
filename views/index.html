@@ -56,6 +56,9 @@
 		};
 
 		const searchFn = async function () {
+			if (!input.value) {
+				return;
+			}
 			if (queryInfo.str !== input.value) {
 				queryInfo.str = input.value;
 				queryInfo.pageIndex = 1;
