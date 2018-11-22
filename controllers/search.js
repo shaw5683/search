@@ -4,8 +4,8 @@ const cheerio = require('cheerio');
 const getContent = function (data) {
 	console.log(data);
 	const $ = cheerio.load(data);
-	console.log($('#rso .srg').html());
-	return $('#rso .srg').html();
+	console.log($('.srg').html());
+	return $('.srg').html();
 };
 
 const getSearchRes = function (ctx) {
