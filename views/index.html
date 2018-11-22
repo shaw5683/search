@@ -20,8 +20,7 @@
 		var input = document.querySelector('input');
 		var container = document.querySelector('.container');
 		search.onclick = function (e) {
-			console.log(input.value);
-			fetch('/string')
+			fetch(`/search?str=${input.value}`, {method: 'get'})
 				.then(function(response) {
 					return response.text();
 				})
