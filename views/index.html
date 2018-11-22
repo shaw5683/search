@@ -6,12 +6,15 @@
 	<style rel="stylesheet">
 		.container {
 			width: 100%;
-			height: 600px;
+			height: calc(100vh - 120px);
+			overflow: auto;
 		}
 		#pagination li {
 			display: inline-block;
 			cursor: pointer;
 			color: #4285F4;
+			font-size: 18px;
+			margin-right: 5px;
 		}
 		#pagination li.active {
 			color: #000;
