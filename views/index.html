@@ -19,16 +19,16 @@
 		var search = document.querySelector('#search');
 		var input = document.querySelector('input');
 		var container = document.querySelector('.container');
-		search.onclick = function (e) {
-			fetch(`/search?str=${input.value}`, {method: 'get'})
+		search.addEventListener('click', async function (e) {
+			container.innerHTML = await fetch(`/search?str=${input.value}`, {method: 'get'})
 				.then(function(response) {
 					return response.text();
-				})
-				.then(function(myJson) {
-					console.log(myJson);
-					container.innerHTML = myJson;
 				});
-		}
+			container.querySelectorAll('a').forEach(item => {
+				item.href = `https://www.google.com${item.href}`;
+				item.setAttribute('target', '_blank');
+			});
+		});
 	</script>
 </body>
 </html>
