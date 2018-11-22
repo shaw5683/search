@@ -2,10 +2,8 @@ const https = require('https');
 const cheerio = require('cheerio');
 
 const getContent = function (data) {
-	console.log(data);
 	const $ = cheerio.load(data);
-	console.log($('.srg').html());
-	return $('.srg').html();
+	return $('#ires ol').html();
 };
 
 const getSearchRes = function (ctx) {
@@ -20,7 +18,7 @@ const getSearchRes = function (ctx) {
 
 			// The whole response has been received. Print out the result.
 			resp.on('end', () => {
-				res(data);
+				res(getContent(data));
 			});
 
 		}).on("error", (err) => {
