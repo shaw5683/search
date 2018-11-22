@@ -26,7 +26,7 @@
 				});
 			container.innerHTML = json.result;
 			container.querySelectorAll('a').forEach(item => {
-				item.href = `https://www.google.com${item.href}`;
+				item.href = item.href.replace(/^http:\/\/[^\/]+/i, 'https://www.google.com');
 				item.setAttribute('target', '_blank');
 			});
 		});
