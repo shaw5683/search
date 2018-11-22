@@ -56,7 +56,10 @@
 		};
 
 		const searchFn = async function () {
-			queryInfo.str = input.value;
+			if (queryInfo.str !== input.value) {
+				queryInfo.str = input.value;
+				queryInfo.pageIndex = 1;
+			}
 			let json = await fetch(`/search?str=${queryInfo.str}&pageIndex=${queryInfo.pageIndex}`, {method: 'get'})
 				.then(function(response) {
 					return response.json();
