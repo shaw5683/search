@@ -26,7 +26,7 @@
 				});
 			container.innerHTML = json.result;
 			container.querySelectorAll('a').forEach(item => {
-				item.href = item.href.replace(/^http:\/\/[^\/]+/i, 'https://www.google.com');
+				item.href = item.href.replace(/\S\?q=([^&]+)\S+/i, '$1');
 				item.setAttribute('target', '_blank');
 			});
 		});
