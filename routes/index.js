@@ -11,6 +11,7 @@ router.get('/string', async (ctx, next) => {
 	  https.get('https://www.google.com/', (resp) => {
 
 			// A chunk of data has been recieved.
+			console.log(222);
 			resp.on('data', (chunk) => {
 				data += chunk;
 			});
