@@ -8,6 +8,7 @@ const getContent = function (data) {
 	if (result === null) {
 		return 'No Result';
 	} else {
+		console.log($('#resultStats'))
 		total = $('#resultStats').replace(/^Page\s\S+\sof\sabout\s(\S+)\sresults$/gi, '$1').replace(/,/g, '');
 	}
 	return {
