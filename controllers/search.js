@@ -10,7 +10,7 @@ const getContent = function (data) {
 
 const getSearchRes = function (ctx) {
 	return new Promise((res, rej) => {
-		https.get(`https://www.google.com/search?q=${ctx.query.str}&start=${ctx.query.pageIndex || 1}0`, (resp) => {
+		https.get(`https://www.google.com/search?q=${window.encodeURIComponent(ctx.query.str)}&start=${ctx.query.pageIndex || 1}0`, (resp) => {
 			let data = '';
 
 			// A chunk of data has been recieved.
