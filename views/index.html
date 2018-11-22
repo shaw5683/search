@@ -20,10 +20,11 @@
 		var input = document.querySelector('input');
 		var container = document.querySelector('.container');
 		search.addEventListener('click', async function (e) {
-			container.innerHTML = await fetch(`/search?str=${input.value}`, {method: 'get'})
+			let json = await fetch(`/search?str=${input.value}`, {method: 'get'})
 				.then(function(response) {
-					return response.text();
+					return response.json();
 				});
+			container.innerHTML = json.result;
 			container.querySelectorAll('a').forEach(item => {
 				item.href = `https://www.google.com${item.href}`;
 				item.setAttribute('target', '_blank');
