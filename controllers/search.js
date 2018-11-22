@@ -33,6 +33,7 @@ const search = async (ctx, next) => {
 	try {
 		ctx.body = await getSearchRes();
 	} catch (e) {
+		console.log(e);
 		ctx.body = 'something wrong';
 	}
 };
