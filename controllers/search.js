@@ -9,7 +9,7 @@ const getContent = function (data) {
 		return 'No Result';
 	} else {
 		console.log($('#resultStats').html());
-		total = $('#resultStats').html().match(/\s(\S+)\sresult/i)[1].replace(/,/g, '');
+		total = $('#resultStats').html().match(/(\S+)\sresult/i)[1].replace(/,/g, '');
 	}
 	return {
 		result,
