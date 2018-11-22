@@ -2,7 +2,9 @@ const https = require('https');
 const cheerio = require('cheerio');
 
 const getContent = function (data) {
+	console.log(data);
 	const $ = cheerio.load(data);
+	console.log($('#rso .srg').html());
 	return $('#rso .srg').html();
 };
 
