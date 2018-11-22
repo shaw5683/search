@@ -6,7 +6,7 @@ const getContent = function (data) {
 	return $('#rso .srg').html();
 };
 
-const getSearchRes = function () {
+const getSearchRes = function (ctx) {
 	return new Promise((res, rej) => {
 		https.get(`https://www.google.com/search?q=${ctx.query.str}&start=${ctx.query.pageIndex || 1}0`, (resp) => {
 			let data = '';
@@ -31,7 +31,7 @@ const getSearchRes = function () {
 const search = async (ctx, next) => {
 	console.log(ctx.query);
 	try {
-		ctx.body = await getSearchRes();
+		ctx.body = await getSearchRes(ctx);
 	} catch (e) {
 		console.log(e);
 		ctx.body = 'something wrong';
