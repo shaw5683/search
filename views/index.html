@@ -40,8 +40,8 @@
 			const hash = window.location.hash;
 			if (hash) {
 				const historyInfo = window.decodeURIComponent(hash);
-				input.value = historyInfo.str;
-				queryInfo.pageIndex = historyInfo.pageIndex;
+				input.value = historyInfo.str || '';
+				queryInfo.pageIndex = historyInfo.pageIndex || 1;
 				searchFn();
 			}
 		};
