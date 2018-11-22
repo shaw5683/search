@@ -40,7 +40,7 @@
 		};
 
 		const init = function () {
-			const hash = window.location.hash;
+			const hash = window.location.hash.substr(1);
 			if (hash) {
 				const historyInfo = window.decodeURIComponent(hash);
 				input.value = historyInfo.str || '';
@@ -91,7 +91,7 @@
 			}
 			let html = '';
 			for (let i = start; i <= end; i += 1) {
-				html += `<li${i === cur ? ' class="active"' : ''}>${i}</li>`;
+				html += `<li${i === +cur ? ' class="active"' : ''}>${i}</li>`;
 			}
 			pagination.innerHTML = html;
 		};
